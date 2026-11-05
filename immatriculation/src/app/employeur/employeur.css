@@ -1,0 +1,57 @@
+.form-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+h2 {
+  color: #800000; /* Rouge INSS */
+  border-bottom: 2px solid #800000;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.custom-stepper {
+  background: transparent;
+}
+
+.section {
+  padding: 20px 0;
+}
+
+.section h3 {
+  color: #800000;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+/* Pour que les champs Angular Material prennent toute la largeur de leur colonne */
+mat-form-field {
+  width: 100%;
+}
+
+.step-actions {
+  display: flex;
+  justify-content: flex-end; /* Aligne les boutons à droite */
+  gap: 10px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
+}
