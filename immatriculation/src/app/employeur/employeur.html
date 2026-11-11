@@ -1,116 +1,94 @@
 <div class="form-container">
-  <h2> SYSTEME DES PRESTATIONS - AFFILIATION DES EMPLOYEURS</h2>
+  <h2>PRS2000 - Affiliation Des Employeurs</h2>
 
   <mat-stepper #stepper linear orientation="vertical" class="custom-stepper">
-    
-    <!-- ================= ÉTAPE 1 : EMPLOYEUR ================= -->
-    <mat-step [stepControl]="etape1Employeur" label="Employeur">
-      <form [formGroup]="etape1Employeur">
+    <form [formGroup]="employeurForm"> <!-- On englobe tout -->
+      
+      <!-- ÉTAPE 1 : EMPLOYEUR & AUTRES -->
+      <mat-step [stepControl]="employeurForm" label="Employeur / Autres">
         <div class="section">
-          <h3>Informations de l'Employeur</h3>
+          <h3>Informations de base</h3>
           <div class="grid">
-            <mat-form-field><mat-label>Nom/Raison Sociale *</mat-label><input matInput formControlName="empNom"></mat-form-field>
+            <mat-form-field><mat-label>Nom *</mat-label><input matInput formControlName="empNom"></mat-form-field>
             <mat-form-field><mat-label>Prénom</mat-label><input matInput formControlName="empPrenom"></mat-form-field>
-            <mat-form-field><mat-label>Affiliation</mat-label><input matInput type="number" formControlName="empAffiliation"></mat-form-field>
-            <mat-form-field><mat-label>Sige</mat-label><input matInput formControlName="empAbrev"></mat-form-field>
-            
-            <mat-form-field><mat-label>Date Demande</mat-label><input matInput type="date" formControlName="empDtDemande"></mat-form-field>
             <mat-form-field><mat-label>Date Réception *</mat-label><input matInput type="date" formControlName="empDtReception"></mat-form-field>
-            <mat-form-field><mat-label>Type Assurance *</mat-label>
-              <mat-select formControlName="empAssurance">
-                <mat-option value="N">Normale</mat-option>
-                <mat-option value="A">Autre</mat-option>
-              </mat-select>
-            </mat-form-field>
             <mat-form-field><mat-label>Etat *</mat-label>
-              <mat-select formControlName="empEtat">
-                <mat-option value="A">Actif</mat-option>
-                <mat-option value="I">Inactif</mat-option>
-              </mat-select>
-            </mat-form-field>
-            
-            <!-- CHAMP AJOUTÉ ICI POUR ÉVITER L'ERREUR NOT NULL -->
-            <mat-form-field><mat-label>Exemption Intérêt *</mat-label>
-              <mat-select formControlName="empIndExempte">
-                <mat-option value="N">Non</mat-option>
-                <mat-option value="O">Oui</mat-option>
-              </mat-select>
+              <mat-select formControlName="empEtat"><mat-option value="A">Actif</mat-option></mat-select>
             </mat-form-field>
           </div>
         </div>
-      </form>
-      <div class="step-actions">
-        <button mat-button matStepperNext color="primary">Suivant <mat-icon>arrow_forward</mat-icon></button>
-      </div>
-    </mat-step>
-
-    <!-- ================= ÉTAPE 2 : ADRESSE PHYSIQUE ================= -->
-    <mat-step [stepControl]="etape2Adresse" label="Adresse Physique">
-      <form [formGroup]="etape2Adresse">
+        
         <div class="section">
-          <h3>Adresse Physique</h3>
+          <h3>Autres (*********)</h3>
           <div class="grid">
-            <mat-form-field><mat-label>Rue</mat-label><input matInput formControlName="empRue"></mat-form-field>
-            <mat-form-field><mat-label>Localité *</mat-label><input matInput formControlName="empLocalite"></mat-form-field>
-            <mat-form-field><mat-label>Ville *</mat-label><input matInput formControlName="empVille"></mat-form-field>
-            <mat-form-field><mat-label>Téléphone *</mat-label><input matInput formControlName="empTelephone"></mat-form-field>
-            <mat-form-field><mat-label>Email</mat-label><input matInput formControlName="empEmail"></mat-form-field>
-            
-            <!-- CHAMPS OBLIGATOIRES AJOUTÉS -->
+            <mat-form-field><mat-label>Nature Juridique *</mat-label><input matInput formControlName="empNatJuridique"></mat-form-field>
             <mat-form-field><mat-label>Province *</mat-label><input matInput formControlName="empProvince"></mat-form-field>
             <mat-form-field><mat-label>Commune *</mat-label><input matInput formControlName="empCommune"></mat-form-field>
-            <mat-form-field><mat-label>Colline/Quartier *</mat-label><input matInput formControlName="empColline"></mat-form-field>
-          </div>
-        </div>
-      </form>
-      <div class="step-actions">
-        <button mat-button matStepperPrevious>Précédent</button>
-        <button mat-button matStepperNext color="primary">Suivant <mat-icon>arrow_forward</mat-icon></button>
-      </div>
-    </mat-step>
-
-    <!-- ================= ÉTAPE 3 : CONTACT ================= -->
-    <mat-step [stepControl]="etape3Contact" label="Contact">
-      <form [formGroup]="etape3Contact">
-        <div class="section">
-          <h3>Personne à contacter</h3>
-          <div class="grid">
-            <mat-form-field><mat-label>Nom Contact</mat-label><input matInput formControlName="empContacte"></mat-form-field>
-            <mat-form-field><mat-label>Qualité</mat-label><input matInput formControlName="empQualiteC"></mat-form-field>
-            <mat-form-field><mat-label>Téléphone Contact</mat-label><input matInput formControlName="empTelephoneC"></mat-form-field>
-          </div>
-        </div>
-      </form>
-      <div class="step-actions">
-        <button mat-button matStepperPrevious>Précédent</button>
-        <button mat-button matStepperNext color="primary">Suivant <mat-icon>arrow_forward</mat-icon></button>
-      </div>
-    </mat-step>
-
-    <!-- ================= ÉTAPE 4 : AUTRES ================= -->
-    <mat-step [stepControl]="etape4Autres" label="Autres">
-      <form [formGroup]="etape4Autres">
-        <div class="section">
-          <h3>Informations Complémentaires</h3>
-          <div class="grid">
-            <mat-form-field><mat-label>Date Création Entreprise *</mat-label><input matInput type="date" formControlName="empDtCreeEntr"></mat-form-field>
+            <mat-form-field><mat-label>Colline *</mat-label><input matInput formControlName="empColline"></mat-form-field>
             <mat-form-field><mat-label>Date 1ère Embauche *</mat-label><input matInput type="date" formControlName="empDtPremierEm"></mat-form-field>
+            <mat-form-field><mat-label>Date Création Entr. *</mat-label><input matInput type="date" formControlName="empDtCreeEntr"></mat-form-field>
             <mat-form-field><mat-label>Nombre Travailleurs *</mat-label><input matInput type="number" formControlName="empNbreTravaill"></mat-form-field>
-            <mat-form-field><mat-label>Code Fiscal *</mat-label><input matInput formControlName="empCodeFiscal"></mat-form-field>
-            
-            <!-- CHAMP AJOUTÉ ICI POUR ÉVITER L'ERREUR NOT NULL -->
-            <mat-form-field><mat-label>Reg. Commerce *</mat-label><input matInput formControlName="empRegCommerce"></mat-form-field>
           </div>
         </div>
-      </form>
-      <div class="step-actions">
-        <button mat-button matStepperPrevious>Précédent</button>
-        <button mat-raised-button color="primary" (click)="onSubmit()" 
-                [disabled]="!etape1Employeur.valid || !etape2Adresse.valid || !etape3Contact.valid || !etape4Autres.valid">
-          Enregistrer
-        </button>
-      </div>
-    </mat-step>
+        <div class="step-actions"><button mat-button matStepperNext color="primary">Suivant</button></div>
+      </mat-step>
 
+      <!-- ÉTAPE 2 : ADRESSE & CONTACT -->
+      <mat-step [stepControl]="employeurForm" label="Adresse / Contact">
+        <!-- ... Mettez les champs Adresse et Contact ici ... -->
+        <div class="step-actions">
+          <button mat-button matStepperPrevious>Précédent</button>
+          <button mat-button matStepperNext color="primary">Suivant</button>
+        </div>
+      </mat-step>
+
+      <!-- ÉTAPE 3 : SECTEURS (Tableau) -->
+      <mat-step [stepControl]="employeurForm" label="Secteur">
+        <div class="section">
+          <h3>Secteurs</h3>
+          <div formArrayName="secteurs">
+            <div *ngFor="let s of secteurs.controls; let i=index" [formGroupName]="i" class="row-item">
+              <mat-form-field><mat-label>Code Secteur *</mat-label><input matInput formControlName="esecSecteur"></mat-form-field>
+              <button mat-icon-button color="warn" (click)="secteurs.removeAt(i)"><mat-icon>delete</mat-icon></button>
+            </div>
+          </div>
+          <button mat-raised-button color="accent" (click)="addSecteur()">+ Ajouter Secteur</button>
+        </div>
+
+        <div class="section">
+          <h3>Sous-Secteurs</h3>
+          <div formArrayName="sousSecteurs">
+            <div *ngFor="let ss of sousSecteurs.controls; let i=index" [formGroupName]="i" class="row-item">
+              <mat-form-field><mat-label>Code Sous-Secteur *</mat-label><input matInput formControlName="esseSousSecteur"></mat-form-field>
+              <button mat-icon-button color="warn" (click)="sousSecteurs.removeAt(i)"><mat-icon>delete</mat-icon></button>
+            </div>
+          </div>
+          <button mat-raised-button color="accent" (click)="addSousSecteur()">+ Ajouter Sous-Secteur</button>
+        </div>
+        <div class="step-actions">
+          <button mat-button matStepperPrevious>Précédent</button>
+          <button mat-button matStepperNext color="primary">Suivant</button>
+        </div>
+      </mat-step>
+
+      <!-- ÉTAPE 4 : ACTIVITÉS -->
+      <mat-step [stepControl]="employeurForm" label="Activité">
+         <!-- ... Même principe avec formArrayName="activites" ... -->
+         <div class="step-actions">
+          <button mat-button matStepperPrevious>Précédent</button>
+          <button mat-button matStepperNext color="primary">Suivant</button>
+        </div>
+      </mat-step>
+
+      <!-- ÉTAPE 5 : SITUATION & DOCUMENTS -->
+      <mat-step [stepControl]="employeurForm" label="Situation / Doc">
+        <!-- ... Même principe avec formArrayName="situations" et "documents" ... -->
+        <div class="step-actions">
+          <button mat-button matStepperPrevious>Précédent</button>
+          <button mat-raised-button color="primary" (click)="onSubmit()">Enregistrer TOUT</button>
+        </div>
+      </mat-step>
+
+    </form>
   </mat-stepper>
 </div>

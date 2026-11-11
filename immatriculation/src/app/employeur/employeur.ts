@@ -1,21 +1,21 @@
-import { Component, OnInit, inject, ViewChild } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-
-import { MatStepperModule, MatStepper } from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-employeur',
   standalone: true,
   imports: [
-    CommonModule, ReactiveFormsModule, MatStepperModule, MatInputModule, 
-    MatSelectModule, MatButtonModule, MatFormFieldModule, MatIconModule
+    CommonModule, ReactiveFormsModule, MatStepperModule, 
+    MatInputModule, MatSelectModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatCheckboxModule
   ],
   templateUrl: './employeur.html',
   styleUrls: ['./employeur.css']
@@ -24,74 +24,107 @@ export class EmployeurComponent implements OnInit {
   private fb = inject(FormBuilder);
   private http = inject(HttpClient);
 
-  @ViewChild('stepper') stepper!: MatStepper;
-
-  etape1Employeur!: FormGroup;
-  etape2Adresse!: FormGroup;
-  etape3Contact!: FormGroup;
-  etape4Autres!: FormGroup;
-
-  apiUrl = 'http://localhost:8082/api/employeurs';
+  employeurForm!: FormGroup;
+  apiUrl = 'http://localhost:8083/api/employeurs';
 
   ngOnInit(): void {
-    this.etape1Employeur = this.fb.group({
-      empNom: ['', Validators.required], // Obligatoire
+    this.employeurForm = this.fb.group({
+      // --- ÉTAPE 1: Employeur & Autres ---
+      empNom: ['', Validators.required],
       empPrenom: [''],
       empAffiliation: [null],
       empAbrev: [''],
-      empDtDemande: [''], // Pas obligatoire dans l'entité (pas de nullable=false)
-      empDtReception: ['', Validators.required], // Obligatoire
-      empAssurance: ['N', Validators.required], // Obligatoire
-      empEtat: ['A', Validators.required], // Obligatoire
-      empIndExempte: ['N', Validators.required] // Ajouté ici pour être sûr de l'avoir
-    });
+      empDtDemande: [''],
+      empDtReception: ['', Validators.required],
+      empAssurance: ['N', Validators.required],
+      empEtat: ['A', Validators.required],
+      empIndExempte: ['N', Validators.required],
+      
+      // Champs de l'image "Autres"
+      empNatJuridique: ['', Validators.required],
+      empAgence: [''],
+      empProvince: ['', Validators.required],
+      empCommune: ['', Validators.required],
+      empColline: ['', Validators.required],
+      empDtPremierEm: ['', Validators.required],
+      empDtCreeEntr: ['', Validators.required],
+      empDtNaissance: [''],
+      empNbreTravaill: [1, Validators.required],
+      empFrequencePaie: ['T'],
+      empImpressionPr: [false],
+      empAffilPrecedent: [null],
+      empCompte: [''],
 
-    this.etape2Adresse = this.fb.group({
-      empRue: [''],
-      empLocalite: ['', Validators.required], // Obligatoire
-      empVille: ['', Validators.required], // Obligatoire
-      empTelephone: ['', Validators.required], // Obligatoire
-      empEmail: [''],
-      empProvince: ['', Validators.required], // Obligatoire
-      empCommune: ['', Validators.required], // Obligatoire
-      empColline: ['', Validators.required] // Obligatoire
-    });
+      // --- ÉTAPE 2: Adresse & Contact ---
+      empRue: [''], empLocalite: ['', Validators.required], empVille: ['', Validators.required],
+      empTelephone: ['', Validators.required], empEmail: [''],
+      empContacte: [''], empQualiteC: [''], empTelephoneC: [''],
 
-    this.etape3Contact = this.fb.group({
-      empContacte: [''],
-      empQualiteC: [''],
-      empTelephoneC: ['']
-    });
-
-    this.etape4Autres = this.fb.group({
-      empDtCreeEntr: ['', Validators.required], // Obligatoire
-      empDtPremierEm: ['', Validators.required], // Obligatoire
-      empNbreTravaill: [1, Validators.required], // Obligatoire
-      empCodeFiscal: ['', Validators.required], // Obligatoire
-      empRegCommerce: ['', Validators.required] // Obligatoire
+      // --- ÉTAPES 3, 4, 5 : Les TABLEAUX (FormArray) ---
+      activites: this.fb.array([]),
+      secteurs: this.fb.array([]),
+      sousSecteurs: this.fb.array([]),
+      situations: this.fb.array([]),
+      documents: this.fb.array([])
     });
   }
 
-  onSubmit() {
-    if (this.etape1Employeur.valid && this.etape2Adresse.valid && 
-        this.etape3Contact.valid && this.etape4Autres.valid) {
-      
-      const finalData = {
-        ...this.etape1Employeur.value,
-        ...this.etape2Adresse.value,
-        ...this.etape3Contact.value,
-        ...this.etape4Autres.value
-      };
+  // Getters pour les tableaux
+  get activites(): FormArray { return this.employeurForm.get('activites') as FormArray; }
+  get secteurs(): FormArray { return this.employeurForm.get('secteurs') as FormArray; }
+  get sousSecteurs(): FormArray { return this.employeurForm.get('sousSecteurs') as FormArray; }
+  get situations(): FormArray { return this.employeurForm.get('situations') as FormArray; }
+  get documents(): FormArray { return this.employeurForm.get('documents') as FormArray; }
 
-      this.http.post(this.apiUrl, finalData).subscribe({
-        next: (res: any) => {
-          alert('Succès ! Employeur créé avec l\'ID: ' + res.empSequence);
-          this.stepper.reset();
-        },
-        error: (err) => alert('Erreur lors de la sauvegarde : ' + err.message)
+  // --- Méthodes d'ajout de lignes ---
+  addActivite() {
+    this.activites.push(this.fb.group({
+      eactActivite: ['', Validators.required],
+      eactDtDebut: ['', Validators.required],
+      eactDtFin: ['']
+    }));
+  }
+
+  addSecteur() {
+    this.secteurs.push(this.fb.group({
+      esecSecteur: ['', Validators.required]
+    }));
+  }
+
+  addSousSecteur() {
+    this.sousSecteurs.push(this.fb.group({
+      esseSousSecteur: ['', Validators.required]
+    }));
+  }
+
+  addSituation() {
+    this.situations.push(this.fb.group({
+      esitOperation: ['', Validators.required],
+      esitDtLettre: ['', Validators.required],
+      esitDtEffet: ['', Validators.required],
+      esitRaison: ['']
+    }));
+  }
+
+  addDocument() {
+    this.documents.push(this.fb.group({
+      docDocument: ['', Validators.required],
+      docReference: ['', Validators.required], // Nécessaire pour la clé composite
+      docDtDepot: ['', Validators.required],
+      docNbreCopies: [1, Validators.required],
+      docCommentaires: ['']
+    }));
+  }
+
+  onSubmit() {
+    if (this.employeurForm.valid) {
+      console.log("Données envoyées :", this.employeurForm.value);
+      this.http.post(this.apiUrl, this.employeurForm.value).subscribe({
+        next: (res: any) => alert('Tout a été enregistré avec succès ! ID: ' + res.empSequence),
+        error: (err) => alert('Erreur : ' + err.message)
       });
     } else {
-      alert('Veuillez remplir tous les champs obligatoires (marqués d\'un astérisque *).');
+      alert('Veuillez remplir les champs obligatoires.');
     }
   }
 }
