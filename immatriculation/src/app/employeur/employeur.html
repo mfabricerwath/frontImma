@@ -1,94 +1,154 @@
 <div class="form-container">
-  <h2>PRS2000 - Affiliation Des Employeurs</h2>
+  <h2 class="tit_cent"> Affiliation Des Employeurs</h2>
 
-  <mat-stepper #stepper linear orientation="vertical" class="custom-stepper">
-    <form [formGroup]="employeurForm"> <!-- On englobe tout -->
-      
-      <!-- ÉTAPE 1 : EMPLOYEUR & AUTRES -->
-      <mat-step [stepControl]="employeurForm" label="Employeur / Autres">
+  <!-- On retire le <form> global pour le remplacer par des <form> par étape -->
+  <mat-stepper #stepper linear orientation="horizontal" class="custom-stepper">
+    
+    <!-- ================= ÉTAPE 1 : EMPLOYEUR & AUTRES ================= -->
+    <!-- stepControl vérifie uniquement etape1Form -->
+    <mat-step [stepControl]="etape1Form" label="Employeur & Autres">
+      <form [formGroup]="etape1Form">
         <div class="section">
-          <h3>Informations de base</h3>
+          <h3>Informations de l'Employeur</h3>
           <div class="grid">
-            <mat-form-field><mat-label>Nom *</mat-label><input matInput formControlName="empNom"></mat-form-field>
+            <mat-form-field><mat-label>Nom/Raison Sociale *</mat-label><input matInput formControlName="empNom"></mat-form-field>
             <mat-form-field><mat-label>Prénom</mat-label><input matInput formControlName="empPrenom"></mat-form-field>
+            <mat-form-field><mat-label>Abréviation</mat-label><input matInput formControlName="empAbrev"></mat-form-field>
+            <mat-form-field><mat-label>Sige</mat-label><input matInput formControlName="empAbrev"></mat-form-field>
+            <mat-form-field><mat-label>Date Demande</mat-label><input matInput type="date" formControlName="empDtDemande"></mat-form-field>
             <mat-form-field><mat-label>Date Réception *</mat-label><input matInput type="date" formControlName="empDtReception"></mat-form-field>
+            <mat-form-field><mat-label>Type Assurance *</mat-label>
+              <mat-select formControlName="empAssurance">
+                <mat-option value="N">Normale</mat-option>
+                <mat-option value="A">Autre</mat-option>
+              </mat-select>
+            </mat-form-field>
             <mat-form-field><mat-label>Etat *</mat-label>
-              <mat-select formControlName="empEtat"><mat-option value="A">Actif</mat-option></mat-select>
+              <mat-select formControlName="empEtat">
+                <mat-option value="A">Actif</mat-option>
+                <mat-option value="I">Inactif</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field><mat-label>Exemption Intérêt *</mat-label>
+              <mat-select formControlName="empIndExempte">
+                <mat-option value="N">Non</mat-option>
+                <mat-option value="O">Oui</mat-option>
+              </mat-select>
             </mat-form-field>
           </div>
         </div>
-        
+
         <div class="section">
-          <h3>Autres (*********)</h3>
+          <h3>Autres Informations</h3>
           <div class="grid">
             <mat-form-field><mat-label>Nature Juridique *</mat-label><input matInput formControlName="empNatJuridique"></mat-form-field>
             <mat-form-field><mat-label>Province *</mat-label><input matInput formControlName="empProvince"></mat-form-field>
             <mat-form-field><mat-label>Commune *</mat-label><input matInput formControlName="empCommune"></mat-form-field>
-            <mat-form-field><mat-label>Colline *</mat-label><input matInput formControlName="empColline"></mat-form-field>
+            <mat-form-field><mat-label>Colline/Quartier *</mat-label><input matInput formControlName="empColline"></mat-form-field>
             <mat-form-field><mat-label>Date 1ère Embauche *</mat-label><input matInput type="date" formControlName="empDtPremierEm"></mat-form-field>
-            <mat-form-field><mat-label>Date Création Entr. *</mat-label><input matInput type="date" formControlName="empDtCreeEntr"></mat-form-field>
+            <mat-form-field><mat-label>Date Création Entreprise *</mat-label><input matInput type="date" formControlName="empDtCreeEntr"></mat-form-field>
             <mat-form-field><mat-label>Nombre Travailleurs *</mat-label><input matInput type="number" formControlName="empNbreTravaill"></mat-form-field>
+            <mat-form-field><mat-label>Code Fiscal *</mat-label><input matInput formControlName="empCodeFiscal"></mat-form-field>
+            <mat-form-field><mat-label>Registre de commerce *</mat-label><input matInput formControlName="empRegCommerce"></mat-form-field>
           </div>
         </div>
-        <div class="step-actions"><button mat-button matStepperNext color="primary">Suivant</button></div>
-      </mat-step>
+      </form>
+      <div class="step-actions">
+        <button mat-button matStepperNext color="primary" type="button">Suivant</button>
+      </div>
+    </mat-step>
 
-      <!-- ÉTAPE 2 : ADRESSE & CONTACT -->
-      <mat-step [stepControl]="employeurForm" label="Adresse / Contact">
-        <!-- ... Mettez les champs Adresse et Contact ici ... -->
-        <div class="step-actions">
-          <button mat-button matStepperPrevious>Précédent</button>
-          <button mat-button matStepperNext color="primary">Suivant</button>
+    <!-- ================= ÉTAPE 2 : ADRESSE & CONTACT ================= -->
+    <mat-step [stepControl]="etape2Form" label="Adresse & Contact">
+      <form [formGroup]="etape2Form">
+        <div class="section">
+          <h3>Adresse Physique</h3>
+          <div class="grid">
+            <mat-form-field><mat-label>Rue</mat-label><input matInput formControlName="empRue"></mat-form-field>
+            <mat-form-field><mat-label>Localité *</mat-label><input matInput formControlName="empLocalite"></mat-form-field>
+            <mat-form-field><mat-label>Ville *</mat-label><input matInput formControlName="empVille"></mat-form-field>
+            <mat-form-field><mat-label>Téléphone *</mat-label><input matInput formControlName="empTelephone"></mat-form-field>
+            <mat-form-field><mat-label>Email</mat-label><input matInput formControlName="empEmail"></mat-form-field>
+          </div>
         </div>
-      </mat-step>
+        <div class="section">
+          <h3>Contact</h3>
+          <div class="grid">
+            <mat-form-field><mat-label>Nom Contact</mat-label><input matInput formControlName="empContacte"></mat-form-field>
+            <mat-form-field><mat-label>Qualité</mat-label><input matInput formControlName="empQualiteC"></mat-form-field>
+            <mat-form-field><mat-label>Téléphone Contact</mat-label><input matInput formControlName="empTelephoneC"></mat-form-field>
+          </div>
+        </div>
+      </form>
+      <div class="step-actions">
+        <button mat-button matStepperPrevious type="button">Précédent</button>
+        <button mat-button matStepperNext color="primary" type="button">Suivant</button>
+      </div>
+    </mat-step>
 
-      <!-- ÉTAPE 3 : SECTEURS (Tableau) -->
-      <mat-step [stepControl]="employeurForm" label="Secteur">
+    <!-- ================= ÉTAPE 3 : SECTEURS ================= -->
+    <mat-step [stepControl]="etape3Form" label="Secteurs">
+      <form [formGroup]="etape3Form">
         <div class="section">
           <h3>Secteurs</h3>
           <div formArrayName="secteurs">
             <div *ngFor="let s of secteurs.controls; let i=index" [formGroupName]="i" class="row-item">
               <mat-form-field><mat-label>Code Secteur *</mat-label><input matInput formControlName="esecSecteur"></mat-form-field>
-              <button mat-icon-button color="warn" (click)="secteurs.removeAt(i)"><mat-icon>delete</mat-icon></button>
+              <button mat-icon-button color="warn" type="button" (click)="secteurs.removeAt(i)"><mat-icon>delete</mat-icon></button>
             </div>
           </div>
-          <button mat-raised-button color="accent" (click)="addSecteur()">+ Ajouter Secteur</button>
+          <button mat-raised-button color="accent" type="button" (click)="addSecteur()">+ Ajouter Secteur</button>
         </div>
+      </form>
+      <div class="step-actions">
+        <button mat-button matStepperPrevious type="button">Précédent</button>
+        <button mat-button matStepperNext color="primary" type="button">Suivant</button>
+      </div>
+    </mat-step>
 
+    <!-- ================= ÉTAPE 4 : ACTIVITÉS ================= -->
+    <mat-step [stepControl]="etape4Form" label="Activités">
+      <form [formGroup]="etape4Form">
         <div class="section">
-          <h3>Sous-Secteurs</h3>
-          <div formArrayName="sousSecteurs">
-            <div *ngFor="let ss of sousSecteurs.controls; let i=index" [formGroupName]="i" class="row-item">
-              <mat-form-field><mat-label>Code Sous-Secteur *</mat-label><input matInput formControlName="esseSousSecteur"></mat-form-field>
-              <button mat-icon-button color="warn" (click)="sousSecteurs.removeAt(i)"><mat-icon>delete</mat-icon></button>
+          <h3>Activités Économiques</h3>
+          <div formArrayName="activites">
+            <div *ngFor="let act of activites.controls; let i=index" [formGroupName]="i" class="row-item">
+              <mat-form-field><mat-label>Code Activité *</mat-label><input matInput formControlName="eactActivite"></mat-form-field>
+              <mat-form-field><mat-label>Date Début *</mat-label><input matInput type="date" formControlName="eactDtDebut"></mat-form-field>
+              <mat-form-field><mat-label>Date Fin</mat-label><input matInput type="date" formControlName="eactDtFin"></mat-form-field>
+              <button mat-icon-button color="warn" type="button" (click)="activites.removeAt(i)"><mat-icon>delete</mat-icon></button>
             </div>
           </div>
-          <button mat-raised-button color="accent" (click)="addSousSecteur()">+ Ajouter Sous-Secteur</button>
+          <button mat-raised-button color="accent" type="button" (click)="addActivite()">+ Ajouter Activité</button>
         </div>
-        <div class="step-actions">
-          <button mat-button matStepperPrevious>Précédent</button>
-          <button mat-button matStepperNext color="primary">Suivant</button>
-        </div>
-      </mat-step>
+      </form>
+      <div class="step-actions">
+        <button mat-button matStepperPrevious type="button">Précédent</button>
+        <button mat-button matStepperNext color="primary" type="button">Suivant</button>
+      </div>
+    </mat-step>
 
-      <!-- ÉTAPE 4 : ACTIVITÉS -->
-      <mat-step [stepControl]="employeurForm" label="Activité">
-         <!-- ... Même principe avec formArrayName="activites" ... -->
-         <div class="step-actions">
-          <button mat-button matStepperPrevious>Précédent</button>
-          <button mat-button matStepperNext color="primary">Suivant</button>
+    <!-- ================= ÉTAPE 5 : SITUATIONS ================= -->
+    <mat-step [stepControl]="etape5Form" label="Situations">
+      <form [formGroup]="etape5Form">
+        <div class="section">
+          <h3>Situations</h3>
+          <div formArrayName="situations">
+            <div *ngFor="let sit of situations.controls; let i=index" [formGroupName]="i" class="row-item">
+              <mat-form-field><mat-label>Opération *</mat-label><input matInput formControlName="esitOperation"></mat-form-field>
+              <mat-form-field><mat-label>Date Lettre *</mat-label><input matInput type="date" formControlName="esitDtLettre"></mat-form-field>
+              <mat-form-field><mat-label>Date Effet *</mat-label><input matInput type="date" formControlName="esitDtEffet"></mat-form-field>
+              <button mat-icon-button color="warn" type="button" (click)="situations.removeAt(i)"><mat-icon>delete</mat-icon></button>
+            </div>
+          </div>
+          <button mat-raised-button color="accent" type="button" (click)="addSituation()">+ Ajouter Situation</button>
         </div>
-      </mat-step>
+      </form>
+      <div class="step-actions">
+        <button mat-button matStepperPrevious type="button">Précédent</button>
+        <button mat-raised-button color="primary" (click)="onSubmit()" type="button">Enregistrer TOUT</button>
+      </div>
+    </mat-step>
 
-      <!-- ÉTAPE 5 : SITUATION & DOCUMENTS -->
-      <mat-step [stepControl]="employeurForm" label="Situation / Doc">
-        <!-- ... Même principe avec formArrayName="situations" et "documents" ... -->
-        <div class="step-actions">
-          <button mat-button matStepperPrevious>Précédent</button>
-          <button mat-raised-button color="primary" (click)="onSubmit()">Enregistrer TOUT</button>
-        </div>
-      </mat-step>
-
-    </form>
   </mat-stepper>
 </div>
