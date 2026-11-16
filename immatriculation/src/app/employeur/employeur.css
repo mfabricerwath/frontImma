@@ -1,75 +1,258 @@
+/* =========================================
+   CONTENEUR PRINCIPAL
+   ========================================= */
+
+   /* Fond gris très clair (ou bleuté) pour toute la page */
+body, html {
+  background-color: #eef2f5; /* Gris bleuté moderne */
+  /* OU */
+  /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); Dégradé moderne */
+  margin: 0;
+  height: 100%;
+}
 .form-container {
   max-width: 1200px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  font-family: Arial, sans-serif;
+  margin: 30px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
 }
 
-h2 {
-  color: #800000; /* Rouge INSS */
-  border-bottom: 2px solid #800000;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
- 
+/* =========================================
+   TITRES ET SECTIONS
+   ========================================= */
+h2.tit_cent {
+  background-color: #800000; /* Rouge bordeaux */
+  color: #ffffff;            /* Texte blanc */
+  
+  /* On garde le style centré et majuscule que vous aviez */
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
+  
+  /* Ajustement des espacements pour que le fond englobe bien le texte */
+  padding: 15px 20px;
+  margin-top: 0;
+  margin-bottom: 30px;
+  border-radius: 8px; /* Bords arrondis pour un look moderne */
+  
+  /* On retire la bordure du bas qui n'est plus nécessaire */
+  border-bottom: none; 
+  box-shadow: 0 4px 10px rgba(128, 0, 0, 0.2); /* Petite ombre pour le relief */
 }
-.tit_cent{
-text-align: center;
-text-transform: uppercase;
-}
+
 .section {
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 20px;
-  margin-bottom: 20px;
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 25px;
+  margin-bottom: 25px;
+  transition: all 0.3s ease;
+}
+
+.section:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-color: #d0d0d0;
 }
 
 .section h3 {
   color: #800000;
   font-style: italic;
+  font-weight: 500;
   margin-top: 0;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 5px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 10px;
+  font-size: 18px;
 }
 
+/* =========================================
+   GRILLE DES CHAMPS
+   ========================================= */
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
+  gap: 20px;
 }
 
 mat-form-field {
   width: 100%;
 }
 
-.row-item {
-  display: flex;
-  gap: 15px;
-  align-items: center;
-  margin-bottom: 10px;
-  padding: 10px;
-  background-color: #f4f4f4;
-  border-radius: 4px;
+/* Animation et style moderne pour les champs Angular Material */
+::ng-deep .mat-form-field-outline {
+  border-radius: 8px;
+  transition: border-color 0.3s ease;
 }
 
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: #800000 !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  box-shadow: 0 0 0 3px rgba(128, 0, 0, 0.1);
+}
+
+::ng-deep .mat-form-field-label {
+  color: #666 !important;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-label {
+  color: #800000 !important;
+}
+
+/* =========================================
+   LIGNES DYNAMIQUES (TABLEAUX)
+   ========================================= */
+.row-item {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.row-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.row-item mat-form-field {
+  flex: 1;
+}
+
+/* =========================================
+   BOUTONS D'ACTION
+   ========================================= */
 .step-actions {
   display: flex;
   justify-content: flex-end;
   gap: 15px;
-  margin-top: 20px;
+  margin-top: 25px;
   padding-top: 20px;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #eaeaea;
 }
 
-/* Responsive */
-@media (max-width: 992px) {
-  .grid { grid-template-columns: repeat(2, 1fr); }
+button[mat-button],
+button[mat-raised-button] {
+  padding: 8px 24px;
+  border-radius: 24px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
 }
+
+button[mat-button] {
+  color: #666;
+}
+
+button[mat-button]:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+  color: #333;
+}
+
+button[mat-raised-button][color="primary"] {
+  background-color: #800000;
+  color: white;
+  box-shadow: 0 4px 10px rgba(128, 0, 0, 0.3);
+}
+
+button[mat-raised-button][color="primary"]:hover {
+  background-color: #a00000;
+  box-shadow: 0 6px 14px rgba(128, 0, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+button[mat-raised-button][color="accent"] {
+  background-color: #f5f5f5;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+button[mat-raised-button][color="accent"]:hover {
+  background-color: #e8e8e8;
+  transform: translateY(-1px);
+}
+
+/* Bouton supprimer (icône) */
+button[color="warn"] {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+button[color="warn"]:hover {
+  transform: scale(1.1);
+  color: #d32f2f;
+}
+/* Style de base des boutons (pour que l'ajout de bordure ne décale pas le texte) */
+button[mat-button] {
+  border: 3px solid transparent; /* Bordure invisible par défaut pour garder la même taille */
+  border-radius: 24px;
+  transition: all 0.3s ease; /* Animation fluide */
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+/* Effet au survol (Hover) */
+button[mat-button]:hover {
+  border: 3px solid #800000; /* Bordure épaisse rouge bordeaux */
+  background-color: rgba(128, 0, 0, 0.05); /* Très léger fond rouge transparent */
+  color: #800000; /* Le texte passe en bordeaux */
+  transform: translateY(-2px); /* Petit effet de soulèvement */
+  box-shadow: 0 4px 8px rgba(128, 0, 0, 0.2); /* Légère ombre rouge */
+}
+/* =========================================
+   ANIMATION DU STEPPER
+   ========================================= */
+::ng-deep .mat-step-header {
+  transition: background-color 0.3s ease;
+  border-radius: 8px;
+}
+
+::ng-deep .mat-step-header:hover {
+  background-color: rgba(128, 0, 0, 0.05) !important;
+}
+
+::ng-deep .mat-step-icon-selected {
+  background-color: #800000 !important;
+}
+
+::ng-deep .mat-step-icon {
+  transition: all 0.3s ease;
+}
+
+/* =========================================
+   RESPONSIVE
+   ========================================= */
+@media (max-width: 992px) {
+  .grid { 
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
+
 @media (max-width: 600px) {
-  .grid { grid-template-columns: 1fr; }
-  .row-item { flex-direction: column; }
+  .grid { 
+    grid-template-columns: 1fr; 
+  }
+  
+  .row-item { 
+    flex-direction: column; 
+    align-items: stretch;
+  }
+  
+  .step-actions {
+    flex-direction: column;
+  }
+  
+  button[mat-button],
+  button[mat-raised-button] {
+    width: 100%;
+  }
 }
