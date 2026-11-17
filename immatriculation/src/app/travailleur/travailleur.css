@@ -1,0 +1,131 @@
+.form-container {
+  max-width: 1300px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.tit_cent {
+  color: #800000;
+  text-align: center;
+  text-transform: uppercase;
+  border-bottom: 2px solid #800000;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.header-section {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.header-grid {
+  display: flex;
+  gap: 20px;
+}
+
+.col { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+.photo-col { flex: 0 0 150px; align-items: center; }
+
+.photo-box {
+  width: 120px; height: 150px;
+  border: 1px solid #ccc;
+  background: #eee;
+  display: flex; align-items: center; justify-content: center;
+  color: #999;
+}
+
+.custom-tabs {
+  background: #fff;
+  border: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.tab-content {
+  padding: 20px;
+}
+
+.section-title {
+  color: #800000;
+  font-style: italic;
+  font-weight: bold;
+  margin: 15px 0 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+mat-form-field { width: 100%; }
+
+/* Tableaux */
+.table-container {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.table-header, .table-row {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1.5fr 1.2fr 1fr 0.8fr 1fr 0.5fr;
+  gap: 5px;
+  padding: 8px;
+  align-items: center;
+}
+
+.table-header-service, .table-row-service {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1.2fr 1.2fr 1fr 1fr 0.8fr 1fr 0.5fr;
+  gap: 5px;
+  padding: 8px;
+  align-items: center;
+}
+
+.table-header, .table-header-service {
+  background: #f0f0f0;
+  font-weight: bold;
+  font-size: 12px;
+  color: #333;
+  border-bottom: 1px solid #ccc;
+}
+
+.table-row input, .table-row select, 
+.table-row-service input, .table-row-service select {
+  width: 100%;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Audit */
+.audit-section {
+  background: #e9ecef;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .table-header, .table-row, .table-header-service, .table-row-service { 
+    grid-template-columns: 1fr 1fr 1fr; 
+  }
+}

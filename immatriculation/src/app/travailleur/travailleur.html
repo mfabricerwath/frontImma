@@ -1,1 +1,177 @@
-<p>travailleur works!</p>
+<div class="form-container">
+  <h2 class="tit_cent">Immatriculation Des Travailleurs</h2>
+
+  <form [formGroup]="travailleurForm">
+    
+    <!-- ================= EN-TÊTE ================= -->
+    <div class="header-section">
+      <div class="header-grid">
+        <!-- Colonne 1 -->
+        <div class="col">
+          <mat-form-field><mat-label>Immatriculation</mat-label><input matInput formControlName="trvImmatriculation"></mat-form-field>
+          <mat-form-field><mat-label>Nom *</mat-label><input matInput formControlName="trvNom"></mat-form-field>
+          <mat-form-field><mat-label>Prénom</mat-label><input matInput formControlName="trvPrenom"></mat-form-field>
+          <mat-form-field><mat-label>Nom de Jeune Fille</mat-label><input matInput formControlName="trvNomJeunefille"></mat-form-field>
+          <mat-form-field><mat-label>Nom du Père *</mat-label><input matInput formControlName="trvNomPere"></mat-form-field>
+          <mat-form-field><mat-label>Nom de la Mère *</mat-label><input matInput formControlName="trvNomMere"></mat-form-field>
+        </div>
+
+        <!-- Colonne 2 -->
+        <div class="col">
+          <mat-form-field><mat-label>Date Demande *</mat-label><input matInput type="date" formControlName="trvDtDemande"></mat-form-field>
+          <mat-form-field><mat-label>Date Réception *</mat-label><input matInput type="date" formControlName="trvDtReception"></mat-form-field>
+          <mat-form-field><mat-label>Date Assurance *</mat-label><input matInput type="date" formControlName="trvDtAssurance"></mat-form-field>
+          <mat-form-field><mat-label>Etat *</mat-label>
+            <mat-select formControlName="trvEtat">
+              <mat-option value="A">Actif</mat-option>
+              <mat-option value="I">Inactif</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field><mat-label>Sexe *</mat-label>
+            <mat-select formControlName="trvSexe">
+              <mat-option value="M">Masculin</mat-option>
+              <mat-option value="F">Féminin</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <!-- Colonne 3 (Photo) -->
+        <div class="col photo-col">
+          <label>Photo</label>
+          <div class="photo-box">Aperçu</div>
+          <input type="file" style="margin-top: 10px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= ONGLETS ================= -->
+    <mat-tab-group animationDuration="0ms" class="custom-tabs">
+      
+      <!-- ONGLET AUTRES -->
+      <mat-tab label="Autres">
+        <div class="tab-content grid">
+          <mat-form-field><mat-label>Date Naissance</mat-label><input matInput type="date" formControlName="trvDtNaissance"></mat-form-field>
+          <mat-form-field><mat-label>Année Naissance *</mat-label><input matInput type="number" formControlName="trvAnNaissance"></mat-form-field>
+          <mat-form-field><mat-label>Etat Civil *</mat-label>
+            <mat-select formControlName="trvEtatCivil">
+              <mat-option value="C">Célibataire</mat-option>
+              <mat-option value="M">Marié(e)</mat-option>
+            </mat-select>
+          </mat-form-field>
+          
+          <mat-form-field><mat-label>Nationalité</mat-label><input matInput formControlName="trvNationalite"></mat-form-field>
+          <mat-form-field><mat-label>CNI</mat-label><input matInput formControlName="trvCni"></mat-form-field>
+          
+          <mat-form-field><mat-label>Province *</mat-label><input matInput formControlName="trvProvince"></mat-form-field>
+          <mat-form-field><mat-label>Commune *</mat-label><input matInput formControlName="trvCommune"></mat-form-field>
+          <mat-form-field><mat-label>Colline *</mat-label><input matInput formControlName="trvColline"></mat-form-field>
+          
+          <mat-form-field><mat-label>Catégorie</mat-label><input matInput formControlName="trvCatProf"></mat-form-field>
+          <mat-form-field><mat-label>Niveau Formation</mat-label><input matInput formControlName="trvNiveauFormation"></mat-form-field>
+          <mat-form-field><mat-label>Représentant Légal</mat-label><input matInput formControlName="trvRepLegal"></mat-form-field>
+        </div>
+      </mat-tab>
+
+      <!-- ONGLET ADRESSE -->
+      <mat-tab label="Adresse">
+        <div class="tab-content">
+          <div class="section-title">Adresse Physique</div>
+          <div class="grid">
+            <mat-form-field><mat-label>Rue</mat-label><input matInput formControlName="trvRue"></mat-form-field>
+            <mat-form-field><mat-label>Localité</mat-label><input matInput formControlName="trvLocalite"></mat-form-field>
+            <mat-form-field><mat-label>Ville</mat-label><input matInput formControlName="trvVille"></mat-form-field>
+            <mat-form-field><mat-label>Pays</mat-label><input matInput formControlName="trvPays"></mat-form-field>
+            <mat-form-field><mat-label>Code Postal</mat-label><input matInput formControlName="trvCodePostal"></mat-form-field>
+            <mat-form-field><mat-label>Email</mat-label><input matInput formControlName="trvEmail"></mat-form-field>
+            <mat-form-field><mat-label>Fax</mat-label><input matInput formControlName="trvFax"></mat-form-field>
+            <mat-form-field><mat-label>Téléphone</mat-label><input matInput formControlName="trvTelephone"></mat-form-field>
+          </div>
+
+          <div class="section-title">Adresse Postale</div>
+          <div class="grid">
+            <mat-form-field><mat-label>Rue (Postale)</mat-label><input matInput formControlName="trvRueP"></mat-form-field>
+            <mat-form-field><mat-label>Localité (Postale)</mat-label><input matInput formControlName="trvLocaliteP"></mat-form-field>
+            <mat-form-field><mat-label>Ville (Postale)</mat-label><input matInput formControlName="trvVilleP"></mat-form-field>
+            <mat-form-field><mat-label>Pays (Postale)</mat-label><input matInput formControlName="trvPaysP"></mat-form-field>
+            <mat-form-field><mat-label>Code Postal (Postale)</mat-label><input matInput formControlName="trvCodePostalP"></mat-form-field>
+            <mat-form-field><mat-label>Email (Postale)</mat-label><input matInput formControlName="trvEmailP"></mat-form-field>
+            <mat-form-field><mat-label>Fax (Postale)</mat-label><input matInput formControlName="trvFaxP"></mat-form-field>
+            <mat-form-field><mat-label>Téléphone (Postale)</mat-label><input matInput formControlName="trvTelephoneP"></mat-form-field>
+          </div>
+        </div>
+      </mat-tab>
+
+      <!-- ONGLET RELATION -->
+      <mat-tab label="Relation">
+        <div class="tab-content">
+          <div class="table-container">
+            <div class="table-header">
+              <span>Code*</span><span>Nom*</span><span>Prénom</span>
+              <span>Date Naiss.</span><span>Année Naiss.*</span><span>Sexe*</span><span>Etat</span><span>Action</span>
+            </div>
+            <div formArrayName="relations">
+              <div *ngFor="let rel of relations.controls; let i=index" [formGroupName]="i" class="table-row">
+                <input formControlName="id.relCode" placeholder="Code">
+                <input formControlName="relNom" placeholder="Nom">
+                <input formControlName="relPrenom" placeholder="Prénom">
+                <input formControlName="relDtNaissance" type="date">
+                <input formControlName="relAnNaissance" type="number">
+                <select formControlName="relSexe">
+                  <option value="M">M</option><option value="F">F</option>
+                </select>
+                <input formControlName="relEtat" placeholder="Etat">
+                <button mat-icon-button color="warn" (click)="relations.removeAt(i)"><mat-icon>delete</mat-icon></button>
+              </div>
+            </div>
+          </div>
+          <button mat-raised-button color="accent" (click)="addRelation()">+ Ajouter une Relation</button>
+        </div>
+      </mat-tab>
+
+      <!-- ONGLET SERVICES -->
+      <mat-tab label="Services">
+        <div class="tab-content">
+          <div class="table-container">
+            <div class="table-header-service">
+              <span>Date Embauche*</span><span>Salaire*</span><span>Date Fin</span><span>Affiliation*</span>
+              <span>ID Employeur</span><span>Type Ass.*</span><span>Etat*</span><span>Matricule</span><span>Action</span>
+            </div>
+            <div formArrayName="services">
+              <div *ngFor="let srv of services.controls; let i=index" [formGroupName]="i" class="table-row-service">
+                <input formControlName="id.tserDtEmbauche" type="date">
+                <input formControlName="tserSalaire" type="number">
+                <input formControlName="tserDtFin" type="date">
+                <input formControlName="tserAffiliation" type="number">
+                <input formControlName="id.tserEmpSequence" type="number" placeholder="ID Employeur">
+                <input formControlName="tserTypeAss" placeholder="Type Ass.">
+                <select formControlName="tserEtat">
+                  <option value="A">Actif</option><option value="I">Inactif</option>
+                </select>
+                <input formControlName="tserMatricule">
+                <button mat-icon-button color="warn" (click)="services.removeAt(i)"><mat-icon>delete</mat-icon></button>
+              </div>
+            </div>
+          </div>
+          <button mat-raised-button color="accent" (click)="addService()">+ Ajouter un Service</button>
+        </div>
+      </mat-tab>
+
+    </mat-tab-group>
+
+    <!-- ================= AUDIT ================= -->
+    <div class="audit-section">
+      <div class="grid">
+        <mat-form-field><mat-label>Date Créée</mat-label><input matInput formControlName="trvDtCreee" readonly></mat-form-field>
+        <mat-form-field><mat-label>Créé Par</mat-label><input matInput formControlName="trvUtilCree" readonly></mat-form-field>
+        <mat-form-field><mat-label>Date Modifiée</mat-label><input matInput formControlName="trvDtModifiee" readonly></mat-form-field>
+        <mat-form-field><mat-label>Modifié Par</mat-label><input matInput formControlName="trvUtilModifie" readonly></mat-form-field>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button mat-raised-button color="warn" type="button" (click)="travailleurForm.reset()">Annuler</button>
+      <button mat-raised-button color="primary" (click)="onSubmit()" [disabled]="!travailleurForm.valid">Enregistrer</button>
+    </div>
+
+  </form>
+</div>
