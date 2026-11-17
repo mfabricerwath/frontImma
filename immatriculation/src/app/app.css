@@ -1,0 +1,40 @@
+.main-toolbar {
+  background-color: #800000 !important; /* Rouge INSS */
+  color: white !important;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.spacer {
+  flex: 1 1 auto; /* Prend tout l'espace disponible pour pousser les boutons à droite */
+}
+
+/* Style des boutons du menu */
+.main-toolbar button {
+  color: white !important;
+  font-size: 16px;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.main-toolbar button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Met en évidence le bouton du module actif */
+.active-link {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-bottom: 3px solid white;
+  border-radius: 0;
+}
+
+.main-content {
+  padding: 20px;
+  background-color: #f4f6f8; /* Le fond gris clair qu'on avait défini */
+  min-height: calc(100vh - 64px); /* 100% de la hauteur moins la toolbar */
+}

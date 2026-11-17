@@ -208,6 +208,17 @@ button[mat-button]:hover {
   transform: translateY(-2px); /* Petit effet de soulèvement */
   box-shadow: 0 4px 8px rgba(128, 0, 0, 0.2); /* Légère ombre rouge */
 }
+
+/* Spécifique pour le bouton primaire (Enregistrer) */
+button[mat-raised-button][color="primary"] {
+  border: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+button[mat-raised-button][color="primary"]:hover {
+  border: 3px solid #4a0000; /* Bordeaux très foncé pour contraster avec le bouton rouge */
+  transform: translateY(-2px);
+}
 /* =========================================
    ANIMATION DU STEPPER
    ========================================= */
