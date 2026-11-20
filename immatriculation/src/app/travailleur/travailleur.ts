@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { EmployeurService } from '../services/employeur.service'; // <-- AJOUT 1
 
 // Angular Material
 import { MatTabsModule } from '@angular/material/tabs';
@@ -24,6 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class TravailleurComponent implements OnInit {
   private fb = inject(FormBuilder);
   private http = inject(HttpClient);
+  private employeurService = inject(EmployeurService); // <-- AJOUT 2
 
   travailleurForm!: FormGroup;
   apiUrl = 'http://localhost:8083/api/travailleurs';
@@ -31,7 +33,7 @@ export class TravailleurComponent implements OnInit {
   ngOnInit(): void {
     this.travailleurForm = this.fb.group({
       // --- EN-TÊTE ---
-      trvImmatriculation: [{ value: '', disabled: true }], // Généré par le backend
+      trvImmatriculation: [{ value: '', disabled: true }], 
       trvNom: ['', Validators.required],
       trvPrenom: [''],
       trvNomJeunefille: [''],
@@ -80,12 +82,15 @@ export class TravailleurComponent implements OnInit {
       relations: this.fb.array([]),
       services: this.fb.array([]),
 
-      // --- AUDIT (AJOUTÉ POUR CORRIGER L'ERREUR) ---
+      // --- AUDIT ---
       trvDtCreee: [{ value: '', disabled: true }],
       trvUtilCree: [{ value: '', disabled: true }],
       trvDtModifiee: [{ value: '', disabled: true }],
       trvUtilModifie: [{ value: '', disabled: true }]
     });
+    
+    // Optionnel : ajouter une ligne de service vide par défaut
+    // this.addService(); 
   }
 
   get relations(): FormArray { return this.travailleurForm.get('relations') as FormArray; }
@@ -111,17 +116,59 @@ export class TravailleurComponent implements OnInit {
       id: this.fb.group({
         tserTrvImmatriculation: [null],
         tserDtEmbauche: ['', Validators.required],
-        tserEmpSequence: [null, Validators.required]
+        tserEmpSequence: [null, Validators.required] // Rempli automatiquement
       }),
       tserAffiliation: [null, Validators.required],
       tserDesignation: [''],
       tserTypeAss: ['', Validators.required],
       tserEtat: ['A', Validators.required],
-      tserMatricule: [''],
+      tserMatricule: ['', Validators.required], // <-- Ajout de Validators.required
+      tserEmpNom: [''],
       tserSalaire: [null],
       tserDtFin: ['']
     }));
   }
+
+  // =====================================================================
+  // <-- AJOUT 3 : LA MÉTHODE POUR CHERCHER L'EMPLOYEUR
+  // =====================================================================
+  onMatriculeBlur(index: number): void {
+
+    const group = this.services.at(index) as FormGroup;
+    const rawValue = group.get('tserAffiliation')?.value;
+   
+    if (rawValue === null || rawValue === undefined || String(rawValue).trim() === '') {
+      return;
+    }
+
+    const affiliation = Number(rawValue);
+    if (!Number.isInteger(affiliation) || affiliation <= 0) {
+      alert(`Numéro d'affiliation invalide. Veuillez saisir un nombre entier.`);
+      group.get( 'tserEmpNom')?.reset();
+      return;
+    }
+
+    this.employeurService.getByAffiliation(affiliation).subscribe({
+      next: (employeur) => {
+        // Remplissage automatique de l'ID employeur
+        group.get(['id', 'tserEmpSequence'])?.patchValue(employeur.empSequence);
+        group.get('tserEmpNom')?.patchValue(employeur.empNom);
+        group.markAsDirty();
+        
+      },
+      error: (err) => {
+        if (err.status === 404) {
+          group.get(['id', 'tserEmpSequence'])?.reset();
+          group.get( 'tserEmpNom')?.reset();
+          alert(`Aucun employeur trouvé avec l'affiliation : ${affiliation}`);
+        } else {
+          console.error('Erreur', err);
+          alert('Erreur technique lors de la recherche.');
+        }
+      }
+    });
+  }
+  // =====================================================================
 
   onSubmit() {
     if (this.travailleurForm.valid) {

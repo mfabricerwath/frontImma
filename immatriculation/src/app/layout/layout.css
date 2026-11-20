@@ -1,0 +1,82 @@
+/* =========================================
+   BARRE DE NAVIGATION PRINCIPALE
+   ========================================= */
+.main-toolbar {
+  background-color: #800000 !important; /* Rouge INSS */
+  color: white !important;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  height: 64px;
+  padding: 0 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.spacer {
+  flex: 1 1 auto; /* Pousse les boutons à droite */
+}
+
+/* =========================================
+   BOUTONS DU MENU
+   ========================================= */
+.main-toolbar button {
+  color: white !important;
+  font-size: 16px;
+  margin-left: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.main-toolbar button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.active-link {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  border-bottom: 3px solid white;
+  border-radius: 0;
+}
+
+/* =========================================
+   PROFIL ET AVATAR (CORRECTION)
+   ========================================= */
+.profile-btn {
+  display: flex !important;
+  align-items: center !important;
+  height: 100%;
+  padding: 0 10px !important;
+  text-transform: none;
+}
+
+.avatar {
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important; /* Force l'image à ne pas déborder */
+  margin-right: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 5px;
+  color: white;
+}
+
+/* =========================================
+   CONTENU
+   ========================================= */
+.main-content {
+  padding: 20px;
+  background-color: #f4f6f8;
+  min-height: calc(100vh - 64px); 
+}

@@ -1,0 +1,75 @@
+<div class="dashboard-wrapper">
+  
+  <!-- LIGNE 1 : LES CARTES CLIQUEABLES (Employeurs et Travailleurs) -->
+  <div class="kpi-row">
+    
+   <!-- Carte Employeurs -->
+<div class="kpi-card inss-red" routerLink="/employeur">
+  <div class="kpi-icon"><mat-icon>business</mat-icon></div>
+  <div class="kpi-data">
+    <h3>1,250</h3>
+    <p>EMPLOYEURS</p>
+  </div>
+</div>
+
+<!-- Carte Travailleurs -->
+<div class="kpi-card blue" routerLink="/travailleur">
+  <div class="kpi-icon"><mat-icon>people</mat-icon></div>
+  <div class="kpi-data">
+    <h3>45,320</h3>
+    <p>TRAVAILLEURS</p>
+  </div>
+</div>
+
+    <!-- Carte Assets (Statique) -->
+    <div class="kpi-card green">
+      <div class="kpi-icon"><mat-icon>assignment</mat-icon></div>
+      <div class="kpi-data">
+        <h3>1,221</h3>
+        <p>ASSETS</p>
+      </div>
+    </div>
+
+    <!-- Carte Banking (Statique) -->
+    <div class="kpi-card light-green">
+      <div class="kpi-icon"><mat-icon>account_balance</mat-icon></div>
+      <div class="kpi-data">
+        <h3>1,221</h3>
+        <p>BANKING</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIGNE 2 : GRAPHIQUES ET METEO (Design de la photo) -->
+  <div class="graphs-row">
+    <!-- Faux Graphique en barres -->
+    <div class="graph-card col-2">
+      <h4>STATISTIQUES D'ACTIVITÉ</h4>
+      <div class="mock-bar-chart">
+        <div class="bars">
+          <div class="bar-group"><div class="bar red"></div><div class="bar green"></div><div class="bar light-blue"></div></div>
+          <div class="bar-group"><div class="bar red"></div><div class="bar green"></div><div class="bar light-blue"></div></div>
+          <div class="bar-group"><div class="bar red"></div><div class="bar green"></div><div class="bar light-blue"></div></div>
+          <div class="bar-group"><div class="bar red"></div><div class="bar green"></div><div class="bar light-blue"></div></div>
+          <div class="bar-group"><div class="bar red"></div><div class="bar green"></div><div class="bar light-blue"></div></div>
+        </div>
+        <div class="x-axis"><span>Jan</span><span>Fév</span><span>Mar</span><span>Avr</span><span>Mai</span></div>
+      </div>
+    </div>
+
+    <!-- Faux Graphique Donut -->
+    <div class="graph-card col-1">
+      <h4>RÉPARTITION</h4>
+      <div class="mock-donut-chart">
+        <div class="donut"></div>
+      </div>
+    </div>
+
+    <!-- Carte Météo -->
+    <div class="weather-card">
+      <mat-icon class="sun">wb_sunny</mat-icon>
+      <h2>28°C</h2>
+      <p>BUJUMBURA</p>
+    </div>
+  </div>
+</div>

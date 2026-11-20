@@ -1,0 +1,93 @@
+.dashboard-wrapper {
+  padding: 20px;
+  background-color: #f4f6f8;
+  min-height: calc(100vh - 64px);
+}
+
+/* ================= CARTES KPI ================= */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.kpi-card {
+  display: flex;
+  color: white;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.kpi-icon {
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,0.1);
+}
+
+.kpi-icon mat-icon {
+  font-size: 36px;
+  width: 36px;
+  height: 36px;
+}
+
+.kpi-data { padding: 20px; flex: 1; }
+.kpi-data h3 { margin: 0; font-size: 26px; font-weight: 500; }
+.kpi-data p { margin: 0; font-size: 12px; opacity: 0.9; letter-spacing: 1px; }
+
+/* Couleurs */
+.inss-red { background: #800000; } /* Couleur INSS */
+.blue { background: #59b2ef; }
+.green { background: #5bb59a; }
+.light-green { background: #8cbb7f; }
+
+/* ================= GRAPHIQUES ================= */
+.graphs-row {
+  display: flex;
+  gap: 20px;
+}
+
+.col-2 { flex: 2; background: white; border-radius: 5px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+.col-1 { flex: 1; background: white; border-radius: 5px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.05); text-align: center; }
+
+.graph-card h4 { margin-top: 0; color: #555; font-size: 14px; text-align: center; font-weight: 500; }
+
+/* Faux graphiques CSS */
+.mock-bar-chart { height: 150px; display: flex; flex-direction: column; justify-content: flex-end; }
+.bars { display: flex; justify-content: space-around; align-items: flex-end; height: 100%; border-bottom: 1px solid #eee; }
+.bar-group { display: flex; gap: 5px; align-items: flex-end; }
+.bar { width: 12px; border-radius: 2px 2px 0 0; }
+.bar.red { height: 70px; background: #800000; }
+.bar.green { height: 100px; background: #5bb59a; }
+.bar.light-blue { height: 50px; background: #9dd0f7; }
+.x-axis { display: flex; justify-content: space-around; margin-top: 10px; font-size: 11px; color: #888; }
+
+.mock-donut-chart { height: 150px; display: flex; justify-content: center; align-items: center; }
+.donut { width: 120px; height: 120px; border-radius: 50%; background: conic-gradient(#5bb59a 0% 40%, #800000 40% 80%, #59b2ef 80% 100%); position: relative; }
+.donut::after { content: ''; position: absolute; top: 25px; left: 25px; width: 70px; height: 70px; background: white; border-radius: 50%; }
+
+/* Météo */
+.weather-card {
+  flex: 1;
+  background: #9b9fd6;
+  color: white;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.weather-card .sun { font-size: 40px; margin-bottom: 10px; color: #fff; width: 40px; height: 40px; }
+.weather-card h2 { margin: 0; font-size: 32px; font-weight: 300; }
+.weather-card p { margin: 5px 0 0; font-size: 14px; opacity: 0.8; }

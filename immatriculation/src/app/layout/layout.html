@@ -1,0 +1,38 @@
+<mat-toolbar color="primary" class="main-toolbar">
+  <!-- Lien vers le Dashboard depuis le logo -->
+  <span class="logo" routerLink="/" style="cursor: pointer;">INSS - PRESTATION</span>
+  
+  <span class="spacer"></span>
+
+  <!-- Lien vers le Dashboard ajouté dans le menu -->
+  <button mat-button routerLink="/" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact: true}">
+    <mat-icon>dashboard</mat-icon> Accueil
+  </button>
+
+  <!-- Boutons de navigation -->
+  <button mat-button routerLink="/employeur" routerLinkActive="active-link">
+    <mat-icon>business</mat-icon> Employeurs
+  </button>
+  
+  <button mat-button routerLink="/travailleur" routerLinkActive="active-link">
+    <mat-icon>people</mat-icon> Travailleurs
+  </button>
+
+  <div class="vertical-divider"></div>
+
+  <!-- Icônes de droite -->
+  <button mat-icon-button><mat-icon>search</mat-icon></button>
+  <button mat-icon-button><mat-icon>fullscreen</mat-icon></button>
+
+  <!-- Profil -->
+  <button mat-button class="profile-btn">
+    <img src="https://i.pravatar.cc/150?img=11" class="avatar">
+    <span class="user-name">Hari Krishna</span>
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
+</mat-toolbar>
+
+<!-- Le contenu des pages (Employeur ou Travailleur) s'affichera ici -->
+<div class="main-content">
+  <router-outlet></router-outlet>
+</div>
